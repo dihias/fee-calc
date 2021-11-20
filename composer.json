@@ -5,12 +5,18 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "Paysera\\CommissionTask\\": "src"
-        }
+            "Feecalc\\": "src"
+        },
+        "classmap": [
+            "app/App.php",
+            "app/AppInterface.php",
+            "app/AppTest.php"
+        ]
+        
     },
     "autoload-dev": {
         "psr-4": {
-            "Paysera\\CommissionTask\\Tests\\": "tests"
+            "Feecalc\\": "tests"
         }
     },
     "require": {
