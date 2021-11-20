@@ -7,12 +7,8 @@ class CalculateFeeF
 {
 
     private FileReaderInterface $fileReader;
-
-    private LoggerInterface $logger;
-
     private TransactionHandler $transactionHandler;
-    private TransactionHistoryManager $transactionHistoryManager;
-    private CurrencyConfig $currencyConfig;
+   
     private $path;
 
 
@@ -23,7 +19,7 @@ class CalculateFeeF
 
     function execute(string $path){
 
-        try {
+     
             $transactionsData = $this->fileReader->read($path);
 
             foreach ($transactionsData as $transactionData) {
@@ -39,20 +35,7 @@ class CalculateFeeF
                 $this->transactionHandler->addTransaction($transactionRequest);
             }
 
-            $this->transactionHandler->handle();
-
-            foreach ($this->transactionHandler->getOriginalTransactionOrder() as $transactionKey) {
-                $processedTransaction = $this->transactionHistoryManager->get($transactionKey);
-                $scale = $this->currencyConfig->getCurrencyScale($processedTransaction->getCurrencyCode());
-                $fee = (float) $processedTransaction->getFee() / (pow(10, $scale));
-                $output->write(number_format($fee, $scale, '.', ''), true);
-            }
-        } catch (Throwable $e) {
-            $this->logger->critical(
-                $e->getMessage().' thrown in '.$e->getFile().' on line '.$e->getLine()
-            );
-
-        }
+        
        
     }
 }
