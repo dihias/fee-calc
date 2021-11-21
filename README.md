@@ -1,4 +1,4 @@
-# Paysera Commission task skeleton
+#Commission task skeleton
 
 Following steps:
 - don't forget to change `Paysera` namespace and package name in `composer.json`
